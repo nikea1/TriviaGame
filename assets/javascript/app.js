@@ -1,14 +1,16 @@
 $(document).ready(function(){
 
+//creates object constructor to set up questions and answers
 function question_answer(question, ans1, ans2, ans3, ans4, img){
-	this.question = question;
-	this.answer1 = ans1;
+	this.question = question;	//stores question string
+	this.answer1 = ans1;		//stores answer string and boolean
 	this.answer2 = ans2;
 	this.answer3 = ans3;
 	this.answer4 = ans4;
-	this.image = img;
 
-	this.getAnswer = function(){
+	this.image = img;			//stores image to show on answer screen
+
+	this.getAnswer = function(){	//method out puts the right answer
 
 		if(ans1[1]) return ans1[0];
 		if(ans2[1]) return ans2[0];
@@ -16,23 +18,23 @@ function question_answer(question, ans1, ans2, ans3, ans4, img){
 		if(ans4[1]) return ans4[0];
 	}
 
-	this.getImg(){
-		return "assets/images/"+img;
+	this.getImg = function(){		//method outputs image source string
+		return "assets/images/"+this.image;
 	}
 
 
 
 }
 
-var q = [];
-var timerID;
-var time = 30;
-var wait;
-var qNum = 0;
-var right = 0;
-var wrong = 0;
-var idk = 0;
+var q = [];	//strores questions and answers
+var timerID;	//keeps track of setInterval function
+var time = 30;	//used to display countdown
+var qNum = 0;	//used to count question index
+var right = 0;	//keeps track of how many were right
+var wrong = 0;	//keeps track of how many were wrong
+var idk = 0;	//keeps track of how many were timed out
 
+//questions and answers
 q[0] = new question_answer("What is the Florida State Bird?", ["Mocking Bird", true], ["Cardinal", false], ["Flamingos", false], ["Ibis", false], "mockingbird.jpg");
 q[1] = new question_answer("What is the Largest City in Florida?", ["Orlando", false], ["Jacksonville", true], ["Miami", false], ["Tallahassee", false], "jacksonville.jpg");
 q[2] = new question_answer("Where is the best place to view Rocket Launches?", ["The Keys", false], ["Orlando", false], ["Tampa", false], ["Titusville", true], "titusville.jpg");
@@ -44,36 +46,36 @@ q[7] = new question_answer("Which Florida teams won the most championships as of
 q[8] = new question_answer("Florida is the _ most populated State as of 2015.", ["1st", false], ["4th", true], ["6th", false], ["8th", false], "3rd.jpg");
 q[9] = new question_answer("What is the state flower?", ["Orange Blossom", true], ["Coreopsis", false], ["Hibiscus", false], ["Lily", false], "orange-blossom.jpg");
 
-$('.start').on("click", function(){
+
+$('.start').on("click", function(){//starts trival game on click
 
 	setPage();
 })
 
-function setPage(){
+function setPage(){	//displays timer questions and answers
 	
 	$('#Timer')
 		.html("<p>Time Remaining: "+ time +" Seconds");
 	
-	if(typeof(timerID) === 'undefined'){
-		timerID = setInterval(function(){
+	if(typeof(timerID) === 'undefined'){	//makes sure timeID is cleared 
+		timerID = setInterval(function(){	//runs timer
 
 			//time--;
 			$('#Timer')
-				.html("<p>Time Remaining: "+ --time +" Seconds");
+				.html("<p>Time Remaining: "+ --time +" Seconds"); //updates timer ever second
 
 			if(time == 0){
-				//clearInterval(timerID);
-				answerPage(q[qNum]);
+				answerPage(q[qNum]);	//displayer answer page when time is up
 			}
-		}, 1000);
+		}, 1000);	//1000ms = 1sec
 	}
 
 	
 
-	$('#Question')
+	$('#Question')	//displays question
 		.html("<p>"+ q[qNum].question +"</p>");
 
-	$('#a1')
+	$('#a1')	//displays posible answer
 		.html("<p>" + q[qNum].answer1[0] + "</p>")
 		.addClass("ans-button")
 		.on("click", function(){
@@ -81,7 +83,7 @@ function setPage(){
 			answerPage(q[qNum], q[qNum].answer1[1]);
 		});
 
-	$('#a2')
+	$('#a2') //displays posible answer
 		.html("<p>" + q[qNum].answer2[0] + "</p>")
 		.addClass("ans-button")
 		.on("click", function(){
@@ -89,7 +91,7 @@ function setPage(){
 			answerPage(q[qNum], q[qNum].answer2[1]);
 		});
 
-	$('#a3')
+	$('#a3') //displays posible answer
 		.html("<p>" + q[qNum].answer3[0] + "</p>")
 		.addClass("ans-button")
 		.on("click", function(){
@@ -97,7 +99,7 @@ function setPage(){
 			answerPage(q[qNum], q[qNum].answer3[1]);
 		});
 
-	$('#a4')
+	$('#a4') //displays posible answer
 		.html("<p>" + q[qNum].answer4[0] + "</p>")
 		.addClass("ans-button")
 		.on("click", function(){
@@ -109,64 +111,65 @@ function setPage(){
 
 }
 
-function answerPage(ans, bool){
+function answerPage(ans, bool){	//displays answer page
 	
-	clearInterval(timerID);
-	timerID = undefined;
-	$('#Question')
-		.html("<p>result</p>");
+	clearInterval(timerID);	//clears time inerval
+	timerID = undefined;	//cleats timerID variable
 
+	//empty outs answer containers
 	$('#a1').off().removeClass("ans-button").empty();
 	$('#a2').off().removeClass("ans-button").empty();
 	$('#a3').off().removeClass("ans-button").empty();
 	$('#a4').off().removeClass("ans-button").empty();
 	
-	if(bool == undefined){
+	if(bool == undefined){	//if time is up 
 		$('#Question')
-			.html("<h1>Time Up!</h1>");
+			.html("<h1>Time Up!</h1>");	//display to the user time is up
 
-		$('#a1').html("<p>The Correct answer is: " + ans.getAnswer() + "</p>");
-		idk++;
+		$('#a1').html("<p>The Correct answer is: " + ans.getAnswer() + "</p>");	//display the right answer
+		idk++;	//increment time out counter
 	}
-	else if(bool){
+	else if(bool){	//if anser is correct
 		$('#Question')
-			.html("<h1>Correct!</h1>");
-		right++;
+			.html("<h1>Correct!</h1>");	//display to the user that they are correct
+		right++;	//increment counter
 	}
-	else{
+	else{	//if answer is wrong
 		$('#Question')
-			.html("<h1>Wrong!</h1>");
+			.html("<h1>Wrong!</h1>");	//display to the user that they're wrong
 
-		$('#a1').html("<p>The Correct answer is: " + ans.getAnswer() + "</p>");
+		$('#a1').html("<p>The Correct answer is: " + ans.getAnswer() + "</p>");	//display the correct answer
 		
-		wrong++;
+		wrong++;	//increment counter
 	}
+	
+	//display picture relating to the correct answer
+	$('#a2').html("<img src='" +ans.getImg()+ "' class='img-responsive ans-pic' alt='answerpic'>")	
 
-
-
-	qNum++;
+	qNum++; //increment question counter
 
 	if(qNum < q.length){
-		time = 30;
+		time = 30;	//reset timer
 
-		setTimeout(setPage, 5000);
+		setTimeout(setPage, 5000);	//go to next question after 5 seconds
 	}
 	else{
-		setTimeout(endPage, 5000);
+		setTimeout(endPage, 5000);	//go to final results screen after 5 secons
 	}
 
 	
 	
 }
 
-function endPage(){
+function endPage(){	//display final results
 	$('#Question').html("<p>All Done! Here's the results</p>");
 
 	$('#a1').html("<p>Correct Answers: " + right + "</p>");
 	$('#a2').html("<p>Wrong Answers: " + wrong + "</p>");
 	$('#a3').html("<p>Unanswers: " + idk + "</p>");
-	$('#a4').addClass("ans-button").html("<h1>Try Again?</h1>").on("click", function(){
-
+	$('#a4').addClass("ans-button").html("<h1>Try Again?</h1>").on("click", function(){	
+		
+		//resets counter variables and starts trivia again
 		$('#a4').removeClass("ans-button");
 		idk = 0;
 		right = 0;

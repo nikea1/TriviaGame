@@ -27,3 +27,14 @@ body{
 	border-width: 2px;
 	vertical-align: middle;
 }
+
+.ans-pic{
+	width: 300px;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+.clearfix{
+	clear:both;
+	overflow: auto;
+}
