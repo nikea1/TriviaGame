@@ -1,12 +1,13 @@
 body{
 	text-align: center;
+	background-image: url("http://www.thedailychronic.net/wp-content/uploads/2015/08/Welcome-to-Florida-sign.jpg");
 	
 
 
 }
 
 .container{
-	background-color: green;
+	background-color: rgba(225,255,255,0.75);
 	height: 575px;
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -15,6 +16,7 @@ body{
 .ans-button{
 	width: 300px;
 	margin: 0 auto;
+	vertical-align: middle;
 }
 
 .ans-button:hover{
@@ -23,4 +25,5 @@ body{
 	border-style: solid;
 	border-color: black;
 	border-width: 2px;
+	vertical-align: middle;
 }

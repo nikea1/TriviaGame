@@ -1,11 +1,12 @@
 $(document).ready(function(){
 
-function question_answer(question, ans1, ans2, ans3, ans4){
+function question_answer(question, ans1, ans2, ans3, ans4, img){
 	this.question = question;
 	this.answer1 = ans1;
 	this.answer2 = ans2;
 	this.answer3 = ans3;
 	this.answer4 = ans4;
+	this.image = img;
 
 	this.getAnswer = function(){
 
@@ -13,6 +14,10 @@ function question_answer(question, ans1, ans2, ans3, ans4){
 		if(ans2[1]) return ans2[0];
 		if(ans3[1]) return ans3[0];
 		if(ans4[1]) return ans4[0];
+	}
+
+	this.getImg(){
+		return "assets/images/"+img;
 	}
 
 
@@ -28,16 +33,16 @@ var right = 0;
 var wrong = 0;
 var idk = 0;
 
-q[0] = new question_answer("What is the Florida State Bird?", ["Mocking Bird", true], ["Cardinal", false], ["Flamingos", false], ["Ibis", false]);
-q[1] = new question_answer("What is the Largest City in Florida?", ["Orlando", false], ["Jacksonville", true], ["Miami", false], ["Tallahassee", false]);
-q[2] = new question_answer("Where is the best place to view Rocket Launches?", ["The Keys", false], ["Orlando", false], ["Tampa", false], ["Titusville", true]);
-q[3] = new question_answer("What year was Florida discovered?", ["1492", false], ["1513", true], ["1676", false], ["1845", false]);
-q[4] = new question_answer("What is the Capital of Florida?", ["Miami", false], ["Tampa", false], ["Tallahassee", true], ["Orlando", false]);
-q[5] = new question_answer("Which of these is NOT an original native to Florida?", ["Salt Water Marlin", false], ["Crocodiles", false], ["Brown Anole", true], ["panthers", false]);
-q[6] = new question_answer("What year did Florida become part of the United States?", ["1513", false], ["1789", false], ["1814", false], ["1845", true]);
-q[7] = new question_answer("Which Florida teams won the most championships as of 2015?", ["Orlando Magic", false], ["Tampa Bay Lightning", false], ["Miami Marlins", false], ["Miami Heat", true]);
-q[8] = new question_answer("Florida is the _ most populated State as of 2015.", ["1st", false], ["4th", true], ["6th", false], ["8th", false]);
-q[9] = new question_answer("What is the state flower?", ["Orange Blossom", true], ["Coreopsis", false], ["Hibiscus", false], ["Lily", false]);
+q[0] = new question_answer("What is the Florida State Bird?", ["Mocking Bird", true], ["Cardinal", false], ["Flamingos", false], ["Ibis", false], "mockingbird.jpg");
+q[1] = new question_answer("What is the Largest City in Florida?", ["Orlando", false], ["Jacksonville", true], ["Miami", false], ["Tallahassee", false], "jacksonville.jpg");
+q[2] = new question_answer("Where is the best place to view Rocket Launches?", ["The Keys", false], ["Orlando", false], ["Tampa", false], ["Titusville", true], "titusville.jpg");
+q[3] = new question_answer("What year was Florida discovered?", ["1492", false], ["1513", true], ["1676", false], ["1845", false], "1513.jpg");
+q[4] = new question_answer("What is the Capital of Florida?", ["Miami", false], ["Tampa", false], ["Tallahassee", true], ["Orlando", false], "Tallahassee.jpg");
+q[5] = new question_answer("Which of these is NOT an original native to Florida?", ["Salt Water Marlin", false], ["Crocodiles", false], ["Brown Anole", true], ["panthers", false], "BrownAnole.jpg");
+q[6] = new question_answer("What year did Florida become part of the United States?", ["1513", false], ["1789", false], ["1814", false], ["1845", true], "1845.jpg");
+q[7] = new question_answer("Which Florida teams won the most championships as of 2015?", ["Orlando Magic", false], ["Tampa Bay Lightning", false], ["Miami Marlins", false], ["Miami Heat", true], "MiamiHeat.jpg");
+q[8] = new question_answer("Florida is the _ most populated State as of 2015.", ["1st", false], ["4th", true], ["6th", false], ["8th", false], "3rd.jpg");
+q[9] = new question_answer("What is the state flower?", ["Orange Blossom", true], ["Coreopsis", false], ["Hibiscus", false], ["Lily", false], "orange-blossom.jpg");
 
 $('.start').on("click", function(){
 
