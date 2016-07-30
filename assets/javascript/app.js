@@ -43,7 +43,7 @@ $(document).ready(function(){
 	q[5] = new question_answer("Which of these is NOT an original native to Florida?", ["Salt Water Marlin", false], ["Crocodiles", false], ["Brown Anole", true], ["Panthers", false], "BrownAnole.jpg");
 	q[6] = new question_answer("What year did Florida become part of the United States?", ["1513", false], ["1789", false], ["1814", false], ["1845", true], "1845.jpg");
 	q[7] = new question_answer("Which Florida teams won the most championships as of 2015?", ["Orlando Magic", false], ["Tampa Bay Lightning", false], ["Miami Marlins", false], ["Miami Heat", true], "MiamiHeat.jpg");
-	q[8] = new question_answer("Florida is the _ most populated State as of 2015.", ["1st", false], ["4th", true], ["6th", false], ["8th", false], "3rd.jpg");
+	q[8] = new question_answer("Florida is the _ most populated State as of 2015.", ["1st", false], ["3rd", true], ["6th", false], ["8th", false], "3rd.jpg");
 	q[9] = new question_answer("What is the state flower?", ["Orange Blossom", true], ["Coreopsis", false], ["Hibiscus", false], ["Lily", false], "orange-blossom.jpg");
 
 
@@ -58,6 +58,7 @@ $(document).ready(function(){
 			.html("<p>Time Remaining: "+ time +" Seconds");
 		
 		if(typeof(timerID) === 'undefined'){	//makes sure timeID is cleared 
+			
 			timerID = setInterval(function(){	//runs timer
 
 				//time--;
@@ -68,7 +69,7 @@ $(document).ready(function(){
 					answerPage(q[qNum]);	//displayer answer page when time is up
 				}
 			}, 1000);	//1000ms = 1sec
-		}
+		}//end of if 
 
 		
 
